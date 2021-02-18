@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+"""
+Module Docstring
+"""
+
+__author__ = "Yacine Floret"
+__version__ = "0.1.0"
+__license__ = "MIT"
+
+import argparse
+from logzero import logger
+
+
+def main(args):
+    """ Main entry point of the app """
+    logger.info("hello world")
+    logger.info(args)
+
+
+if __name__ == "__main__":
+    """ This is executed when run from the command line """
+    parser = argparse.ArgumentParser()
+
+    # Required positional argument
+    parser.add_argument("arg", help="Required positional argument")
+
+    # Optional argument flag which defaults to False
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="count",
+        default=0,
+        help="Verbosity (-v, -vv, etc)")
+
+    # Specify output of "--version"
+    parser.add_argument(
+        "--version",
+        action="version",
+        version="%(prog)s (version {version})".format(version=__version__))
+
+    args = parser.parse_args()
+    main(args)
